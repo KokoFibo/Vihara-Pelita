@@ -29,6 +29,11 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/data', [DataPelitaController::class, 'index'])->name('data');
+Route::middleware(['auth', 'verified'])->group(function () {
+
+
+    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita');
+});
+
 
 require __DIR__ . '/auth.php';

@@ -11,7 +11,11 @@ class DataPelitaController extends Controller
 
     public function index()
     {
-        return Inertia::render('data/Index');
+        $data = DataPelita::all();
+
+        return Inertia::render('data/Index', [
+            'datapelita' => DataPelita::paginate(10)
+        ]);
     }
 
     /**
