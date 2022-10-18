@@ -25,7 +25,7 @@ export default {
   Showing {{ pagination.from }} to {{ pagination.to }} of
   {{ pagination.total }} results
 
-  <div class="btn-group btn-sm d-flex justify-center">
+  <div class="btn-group btn-sm mb-2">
     <button
       class="btn btn-sm"
       :disabled="noPreviousPage"
@@ -33,7 +33,9 @@ export default {
     >
       «
     </button>
-    <button class="btn btn-sm">Page 22</button>
+    <button class="btn btn-sm">
+      Page {{ pagination.current_page }} of {{ pagination.last_page }}
+    </button>
     <button
       class="btn btn-sm"
       :disabled="noNextPage"
