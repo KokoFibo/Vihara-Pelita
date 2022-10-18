@@ -34,7 +34,8 @@ export default {
       «
     </button>
     <button class="btn btn-sm">
-      Page {{ pagination.current_page }} of {{ pagination.last_page }}
+      Page
+      <!-- {{ pagination.current_page }} of {{ pagination.last_page }} -->
     </button>
     <button
       class="btn btn-sm"
