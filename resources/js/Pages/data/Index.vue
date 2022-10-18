@@ -26,7 +26,7 @@ defineProps({
 
             <input
               type="text"
-              placeholder="Search ..."
+              placeholder="Search..."
               class="input input-bordered input-sm w-full max-w-xs mr-5"
             />
             <Pagination :pagination="datapelita" />
