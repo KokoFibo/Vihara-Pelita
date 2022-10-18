@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\DataPelita;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DataPelitaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return Inertia::render('data/Index');
     }
 
     /**
