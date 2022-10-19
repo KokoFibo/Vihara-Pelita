@@ -8,7 +8,7 @@
                     <div class="show">
                         <div class="card w-192 bg-base-100 shadow-xl">
                             <div class="card-body">
-                                <h2 class="card-title">Add Data</h2>
+                                <h2 class="card-title">Add Data1</h2>
                                 <!-- Cabang ID -->
 
                                 <div class="flex justify-evenly">
