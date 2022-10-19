@@ -33,6 +33,15 @@ export default {
       alert('test1');
       document.querySelector(".showAdd").style.display = 'none';
       document.querySelector(".showAdd").style.display = 'inline';
+    },
+    umur_sekarang(dt, umur) {
+      var today = new Date();
+      var yesterday = new Date(dt);
+
+      var y2 = today.getFullYear();
+      var y1 = yesterday.getFullYear();
+      return (y2 - y1) + umur;
+
     }
   },
   watch: {
@@ -66,8 +75,7 @@ export default {
           <div class="p-6 bg-white border-b border-gray-200">
             <!-- Component Create -->
             <div class="showAdd">
-
-              <Create />
+              <!-- <Create /> -->
             </div>
             <!-- Search Bar -->
 
@@ -82,9 +90,7 @@ export default {
                   <th>Nama</th>
                   <th>中文名</th>
                   <th>Umur</th>
-                  <th>Kota</th>
-                  <th>Telepon</th>
-                  <th>HP</th>
+                  <th>Tgl Chiu Tao</th>
                   <th>
                     <Link :href="route('datapelita.create')" class="btn btn-sm btn-success">Add</Link>
 
@@ -96,10 +102,8 @@ export default {
                 <tr v-for="d in datapelita.data" :key="d.id">
                   <td>{{ d.nama }}</td>
                   <td>{{ d.mandarin }}</td>
-                  <td>{{ d.umur }}</td>
-                  <td>{{ d.kota }}</td>
-                  <td>{{ d.telp }}</td>
-                  <td>{{ d.hp }}</td>
+                  <td>{{ umur_sekarang(d.tgl_mohonTao, d.umur ) }}</td>
+                  <td>{{ d.tgl_mohonTao }}</td>
                   <td>
                     <div class="btn-group">
                       <button class="btn btn-sm btn-info">

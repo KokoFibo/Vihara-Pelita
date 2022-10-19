@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Inertia\Inertia;
 use App\Models\Cabang;
 use App\Models\DataPelita;
@@ -12,7 +13,7 @@ class DataPelitaController extends Controller
 
     public function index()
     {
-        // $cabang = Cabang::all();
+        
         $query = DataPelita::query();
 
         if (request('search')) {
