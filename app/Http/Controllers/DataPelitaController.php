@@ -11,22 +11,19 @@ class DataPelitaController extends Controller
 
     public function index()
     {
-        $data = DataPelita::all();
 
-        // $query = DataPelita::query();
+        $query = DataPelita::query();
 
-        // if (request('search')) {
-        //     $query->where('nama', 'LIKE', '%' . request('search') . '%');
-        // }
+        if (request('search')) {
+            $query->where('nama', 'LIKE', '%' . request('search') . '%');
+        }
 
         return Inertia::render('data/Index', [
-            'datapelita' => DataPelita::paginate(10)
+            'datapelita' => $query->paginate(10),
+            'filters' => request()->all(['search'])
         ]);
 
-        // return Inertia::render('Index', [
-
-        //      'filters' => request()->all(['search', 'field', 'direction'])
-        // ]);
+        
     }
 
     /**

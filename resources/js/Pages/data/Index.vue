@@ -1,12 +1,45 @@
-<script setup>
+<script >
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Pagination from "@/Components/Pagination.vue";
 
-defineProps({
-  datapelita: Object,
-});
+export default {
+  components: {
+    AuthenticatedLayout,
+    Head,
+    Link,
+    Pagination,
+  },
+
+  props: {
+    datapelita: Object,
+    filters: Object,
+  },
+
+  data() {
+    return {
+      params: {
+        search: this.filters.search,
+      },
+    };
+  },
+  watch: {
+    params: {
+      handler() {
+        this.$inertia.get(this.route("datapelita"), this.params, {
+          replace: true,
+          preserveState: true,
+        });
+      },
+      deep: true,
+    },
+  },
+};
 </script>
+
+
+
+
 
 <template>
   <Head title="Data" />
@@ -26,6 +59,7 @@ defineProps({
 
             <input
               type="text"
+              v-model="params.search"
               placeholder="Search..."
               class="input input-bordered input-sm w-full max-w-xs mr-5"
             />
