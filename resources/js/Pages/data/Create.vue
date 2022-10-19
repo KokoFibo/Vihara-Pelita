@@ -10,10 +10,7 @@
                             <div class="card-body">
                                 <h2 class="card-title">Add Data</h2>
                                 <!-- Cabang ID -->
-                                <div v-for="c in cabang" :key="c.id">
-                                    isi = {{ c.kode_id }}
 
-                                </div>
                                 <div class="flex justify-evenly">
                                     <form @submit.prevent="form.post('store')">
                                         <!-- Kiri -->
