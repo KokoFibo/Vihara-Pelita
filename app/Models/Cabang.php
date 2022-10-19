@@ -10,8 +10,13 @@ class Cabang extends Model
     use HasFactory;
     protected $fillable = [
         'kode_id',
-        'negara', 
+        'negara',
         'kota',
         'daerah'
     ];
+
+    public function datapelita()
+    {
+        return $this->hasMany(DataPelita::class);
+    }
 }

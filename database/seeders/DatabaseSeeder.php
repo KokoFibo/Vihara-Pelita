@@ -14,11 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\DataPelita::factory(10)->create();
+        \App\Models\DataPelita::factory(15)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\Cabang::factory()->create(
+            [
+                'kode_id' => 'JKT-01',
+                'negara' => 'Indonesia',
+                'kota' => 'Jakarta',
+                'daerah' => 'BNI'
+            ],
+
+        );
     }
 }

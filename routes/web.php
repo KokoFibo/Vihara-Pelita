@@ -29,10 +29,16 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/halaman', function () {
+    return Inertia::render('Halaman');
+})->middleware(['auth', 'verified'])->name('halaman');
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita');
+    Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
+    Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
 });
 
 

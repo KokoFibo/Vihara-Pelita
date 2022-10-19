@@ -10,8 +10,8 @@ class DataPelita extends Model
     use HasFactory;
     protected $fillable = [
         'nama',
-        'mandarin', 
-        'jenis_kelamin', 
+        'mandarin',
+        'jenis_kelamin',
         'umur',
         'alamat',
         'kota',
@@ -19,6 +19,12 @@ class DataPelita extends Model
         'hp',
         'email',
         'tgl_mohonTao',
-        'keterangan'
+        'keterangan',
+        'cabang_id'
     ];
+
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class);
+    }
 }
