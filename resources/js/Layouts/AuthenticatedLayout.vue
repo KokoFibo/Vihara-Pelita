@@ -30,12 +30,16 @@ const showingNavigationDropdown = ref(false);
                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                   Dashboard
                 </NavLink>
-                <NavLink :href="route('datapelita')" :active="route().current('datapelita')">
+                <NavLink :href="route('datapelita.index')" :active="route().current('datapelita.index')">
                   Data Pelita Hati
                 </NavLink>
                 <NavLink :href="route('halaman')" :active="route().current('halaman')">
                   Halaman
                 </NavLink>
+                <NavLink :href="route('daerah.index')" ></NavLink>
+                <NavLink :href="route('datapelita.create')" ></NavLink>
+                  
+                
               </div>
             </div>
 
@@ -123,6 +127,12 @@ const showingNavigationDropdown = ref(false);
             <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
               Dashboard
             </ResponsiveNavLink>
+
+            <ResponsiveNavLink :href="route('datapelita.index')" :active="route().current('datapelita.index')">
+              Data Pelita Hati
+            </ResponsiveNavLink>
+
+          
           </div>
 
           <!-- Responsive Settings Options -->

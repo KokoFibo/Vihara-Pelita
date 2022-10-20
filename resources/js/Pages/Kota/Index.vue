@@ -5,30 +5,40 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 
 <template>
 
-    <Head title="Halaman" />
+    <Head title="Daerah" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Halaman
+                Kota
             </h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <!-- Start -->
-                        <!-- Tab -->
+                    <!-- Tab -->
+                    <div class="tabs mb-5">
                         <div class="tabs">
-                            <Link href="/hal1" class="tab tab-lifted">Tab 1</Link>
-                            <Link class="tab tab-lifted tab-active">Tab 2</Link>
-                            <Link class="tab tab-lifted">Tab 3</Link>
+                            <Link href="/datapelita" class="tab tab-lifted ">Master Data</Link>
+                            <Link href="/daerah" class="tab tab-lifted ">Tambah Daerah</Link>
+                            <Link href="/kota" class="tab tab-lifted tab-active">Tambah Kota</Link>
                         </div>
-                        <!-- end -->
+                    </div>
+                    <!-- End Tab -->
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <h1>Tambah Kota</h1>
                     </div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
 </template>
+<style>
+h1 {
+    color: red;
+    margin: auto;
+    font-size: 30px;
+
+}
+</style>

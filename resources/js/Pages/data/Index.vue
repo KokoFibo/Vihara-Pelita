@@ -72,11 +72,17 @@ export default {
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-          <div class="p-6 bg-white border-b border-gray-200">
-            <!-- Component Create -->
-            <div class="showAdd">
-              <!-- <Create /> -->
+          <!-- Tab -->
+          <div class="tabs mb-5">
+            <div class="tabs">
+              <Link href="/datapelita" class="tab tab-lifted tab-active">Master Data</Link>
+              <Link href="/daerah" class="tab tab-lifted ">Tambah Daerah</Link>
+              <Link href="/kota" class="tab tab-lifted">Tambah Kota</Link>
             </div>
+          </div>
+          <!-- end Tab -->
+          <div class="p-6 bg-white border-b border-gray-200">
+
             <!-- Search Bar -->
 
             <input type="text" v-model="params.search" placeholder="Search..."
@@ -84,42 +90,44 @@ export default {
             <Pagination :pagination="datapelita" />
 
             <!-- Table Start -->
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Nama</th>
-                  <th>中文名</th>
-                  <th>Umur</th>
-                  <th>Tgl Chiu Tao</th>
-                  <th>
-                    <Link :href="route('datapelita.create')" class="btn btn-sm btn-success">Add</Link>
+            <div class="overflow-x-auto">
+              <table class=" table table-compact w-full mt-2 table-zebra">
+                <thead>
+                  <tr>
+                    <th>Nama</th>
+                    <th>中文名</th>
+                    <th>Umur</th>
+                    <th>Tgl Chiu Tao</th>
+                    <th>
+                      <Link :href="route('datapelita.create')" class="btn btn-xs btn-success">Add</Link>
 
 
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="d in datapelita.data" :key="d.id">
-                  <td>{{ d.nama }}</td>
-                  <td>{{ d.mandarin }}</td>
-                  <td>{{ umur_sekarang(d.tgl_mohonTao, d.umur ) }}</td>
-                  <td>{{ d.tgl_mohonTao }}</td>
-                  <td>
-                    <div class="btn-group">
-                      <button class="btn btn-sm btn-info">
-                        Show
-                      </button>
-                      <button class="btn btn-sm btn-warning">
-                        Edit
-                      </button>
-                      <button class="btn btn-sm btn-error">
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="d in datapelita.data" :key="d.id">
+                    <td>{{ d.nama }}</td>
+                    <td>{{ d.mandarin }}</td>
+                    <td>{{ umur_sekarang(d.tgl_mohonTao, d.umur ) }}</td>
+                    <td>{{ d.tgl_mohonTao }}</td>
+                    <td>
+                      <div class="btn-group">
+                        <button class="btn btn-xs btn-info">
+                          Show
+                        </button>
+                        <button class="btn btn-xs btn-warning">
+                          Edit
+                        </button>
+                        <button class="btn btn-xs btn-error">
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <!-- Table End -->
           </div>
         </div>

@@ -4,8 +4,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
+
                     <!-- batas -->
                     <div class="show">
+                        
                         <div class="card w-3/5 bg-green-100 shadow-xl mx-auto">
                             <div class="card-body">
                                 <h2 class="card-title mx-auto">Add Data</h2>

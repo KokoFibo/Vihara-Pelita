@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DataPelitaController;
+use App\Models\DataPelita;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,12 +34,29 @@ Route::get('/halaman', function () {
     return Inertia::render('Halaman');
 })->middleware(['auth', 'verified'])->name('halaman');
 
+Route::get('/daerah', function () {
+    return Inertia::render('Daerah/Index');
+})->middleware(['auth', 'verified'])->name('daerah.index');
+
+Route::get('/kota', function () {
+    return Inertia::render('Kota/Index');
+})->middleware(['auth', 'verified'])->name('kota.index');
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::resource('datapelita', DataPelitaController::class);
+    // Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita');
+    // Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
+    // Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
+    
+    
 
-    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita');
-    Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
-    Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
+
+    Route::get('/hal1', function () {
+        return Inertia::render('Hal1');
+    });
+   
+    
 });
 
 
