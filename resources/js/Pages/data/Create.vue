@@ -28,7 +28,7 @@
 
                                                 <select class="select select-bordered  w-full max-w-xs"
                                                     v-model="form.cabang_id">
-                                                    <option disabled selected>Open this select menu</option>
+                                                    <!-- <option disabled selected>Open this select menu</option> -->
                                                     <option :value="c.id" v-for="c in cabang" :key="c.id">{{
                                                     c.kode_id }}</option>
                                                 </select>
@@ -139,10 +139,10 @@
                                                         <label class="form-check-label inline-block text-gray-800"
                                                             for="inlineRadio20">Perempuan</label>
                                                     </div>
-                                                    <p class="text-red-500 text-xs italic"
-                                                        v-if="$page.props.errors.jenis_kelamin">{{
-                                                        $page.props.errors.jenis_kelamin }}</p>
                                                 </div>
+                                                <p class="text-red-500 text-xs italic"
+                                                    v-if="$page.props.errors.jenis_kelamin">{{
+                                                    $page.props.errors.jenis_kelamin }}</p>
                                             </div>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 mb-3">
@@ -192,7 +192,7 @@ import { Head, useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     cabang: Array,
-});
+})
 
 const form = useForm({
     nama: "",
@@ -205,7 +205,7 @@ const form = useForm({
     hp: "",
     email: "",
     tgl_mohonTao: "",
-    keterangan: "",
+    keterangan: "Active",
     cabang_id: null
 });
 </script>

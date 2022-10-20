@@ -13,7 +13,7 @@ class DataPelitaController extends Controller
 
     public function index()
     {
-        
+
         $query = DataPelita::query();
 
         if (request('search')) {
@@ -50,14 +50,14 @@ class DataPelitaController extends Controller
             'nama' => ['required'],
             'mandarin' => ['required'],
             'jenis_kelamin' => ['required'],
-            'umur' => ['required'],
+            'umur' => ['required', 'numeric', 'min:1', 'max:150'],
             'alamat' => ['required'],
             'kota' => ['required'],
-            'telp' => ['required'],
-            'hp' => ['required'],
-            'email' => ['required'],
-            'tgl_mohonTao' => ['required'],
-            'keterangan' => ['required'],
+            'telp' => ['nullable', 'numeric', 'min_digits:9', 'max_digits:13'],
+            'hp' => ['nullable', 'numeric'],
+            'email' => ['nullable', 'email'],
+            'tgl_mohonTao' => ['date'],
+            'keterangan' => ['nullable'],
             'cabang_id' => ['required']
         ]);
 
@@ -76,7 +76,7 @@ class DataPelitaController extends Controller
             'cabang_id' => $request->cabang_id,
         ]);
 
-        return redirect()->route('datapelita');
+        return redirect()->route('datapelita.index');
     }
 
     /**
