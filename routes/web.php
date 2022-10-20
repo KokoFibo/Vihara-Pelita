@@ -44,19 +44,17 @@ Route::get('/kota', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::resource('datapelita', DataPelitaController::class);
-    // Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita');
-    // Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
-    // Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
-    
-    
+    //Route::resource('datapelita', DataPelitaController::class);
+    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita.index');
+    Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
+    Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
+
+
 
 
     Route::get('/hal1', function () {
         return Inertia::render('Hal1');
     });
-   
-    
 });
 
 
