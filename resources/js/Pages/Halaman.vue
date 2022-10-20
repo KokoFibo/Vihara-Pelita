@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
+
+
 </script>
 
 <template>
@@ -19,13 +21,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <!-- Start -->
-                        <!-- Tab -->
-                        <div class="tabs">
-                            <Link href="/hal1" class="tab tab-lifted">Tab 1</Link>
-                            <Link class="tab tab-lifted tab-active">Tab 2</Link>
-                            <Link class="tab tab-lifted">Tab 3</Link>
-                        </div>
-                        <!-- end -->
+                        new Date().toLocaleString()
                     </div>
                 </div>
             </div>

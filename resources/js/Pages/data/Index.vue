@@ -17,7 +17,6 @@ export default {
 
   props: {
     datapelita: Object,
-    cabang: Array,
     filters: Object,
   },
 
@@ -67,6 +66,7 @@ export default {
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Data Pelita
       </h2>
+
     </template>
 
     <div class="py-12">
@@ -119,9 +119,8 @@ export default {
                         <button class="btn btn-xs btn-warning">
                           Edit
                         </button>
-                        <button class="btn btn-xs btn-error">
-                          Delete
-                        </button>
+                        <Link :href="route('datapelita.destroy', d.id)" class="btn btn-xs btn-error" method="delete">
+                        Delete</Link>
                       </div>
                     </td>
                   </tr>

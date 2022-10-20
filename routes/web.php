@@ -48,6 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita.index');
     Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
     Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
+    Route::delete('/datapelita/{id}', [DataPelitaController::class, 'destroy'])->name('datapelita.destroy');
 
 
 

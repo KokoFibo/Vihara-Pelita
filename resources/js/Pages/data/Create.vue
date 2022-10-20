@@ -171,6 +171,7 @@
                                             <button type="submit" @click="hideAdd" class="btn btn-success">Save</button>
                                         </div>
                                     </form>
+                                    <button @click="tgl_hariIni()">getdate</button>
 
 
 
@@ -189,6 +190,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
+
+function tgl_hariIni() {
+    const current = new Date();
+    const date = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+    console.log(date);
+    return date;
+}
 
 const props = defineProps({
     cabang: Array,

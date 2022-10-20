@@ -119,8 +119,10 @@ class DataPelitaController extends Controller
      * @param  \App\Models\DataPelita  $dataPelita
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataPelita $dataPelita)
+    public function destroy($id)
     {
-        //
+        $datapelita = DataPelita::find($id);
+        $datapelita->delete();
+        return redirect()->route('datapelita.index');
     }
 }
