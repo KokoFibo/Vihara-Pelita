@@ -21,7 +21,16 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <!-- Start -->
-                        new Date().toLocaleString()
+                        <div class="mb-5">
+                            <label class="mr-3">Nama</label>
+                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                        </div>
+                        <div class="mb-5">
+                            <label class="mr-3">Nama</label>
+                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                        </div>
+                        
+                       
                     </div>
                 </div>
             </div>

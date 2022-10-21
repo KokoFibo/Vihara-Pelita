@@ -26,36 +26,34 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/halaman', function () {
-    return Inertia::render('Halaman');
-})->middleware(['auth', 'verified'])->name('halaman');
 
-Route::get('/daerah', function () {
-    return Inertia::render('Daerah/Index');
-})->middleware(['auth', 'verified'])->name('daerah.index');
-
-Route::get('/kota', function () {
-    return Inertia::render('Kota/Index');
-})->middleware(['auth', 'verified'])->name('kota.index');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-    //Route::resource('datapelita', DataPelitaController::class);
-    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita.index');
+    Route::get('/halaman', function () {
+        return Inertia::render('Halaman');
+    })->name('halaman');
+
+    Route::get('/daerah', function () {
+        return Inertia::render('Daerah/Index');
+    })->name('daerah.index');
+
+    Route::get('/kota', function () {
+        return Inertia::render('Kota/Index');
+    })->name('kota.index');
+
     Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
     Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');
     Route::delete('/datapelita/{id}', [DataPelitaController::class, 'destroy'])->name('datapelita.destroy');
-
-
-
-
-    Route::get('/hal1', function () {
-        return Inertia::render('Hal1');
-    });
+    Route::put('/datapelita/{id}/update', [DataPelitaController::class, 'update'])->name('datapelita.update');
+    Route::get('/datapelita/{id}/edit', [DataPelitaController::class, 'edit'])->name('datapelita.edit');
+    Route::get('/datapelita/{id}/show', [DataPelitaController::class, 'show'])->name('datapelita.show');
+    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita.index');
 });
 
 

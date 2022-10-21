@@ -27,23 +27,14 @@ class DataPelitaController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $cabang = Cabang::all();
         return Inertia::render('data/Create', compact('cabang'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -79,15 +70,10 @@ class DataPelitaController extends Controller
         return redirect()->route('datapelita.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DataPelita  $dataPelita
-     * @return \Illuminate\Http\Response
-     */
-    public function show(DataPelita $dataPelita)
+
+    public function show($id)
     {
-        //
+        return Inertia::render('data/Show');
     }
 
     /**
@@ -96,9 +82,11 @@ class DataPelitaController extends Controller
      * @param  \App\Models\DataPelita  $dataPelita
      * @return \Illuminate\Http\Response
      */
-    public function edit(DataPelita $dataPelita)
+    public function edit($id)
     {
-        //
+        $cabang = Cabang::all();
+        $datapelita = DataPelita::find($id);
+        return Inertia::render('data/Edit', compact(['datapelita', 'cabang']));
     }
 
     /**
@@ -108,9 +96,42 @@ class DataPelitaController extends Controller
      * @param  \App\Models\DataPelita  $dataPelita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DataPelita $dataPelita)
+    public function update(Request $request, $id)
     {
-        //
+        // Validation
+        $this->validate($request, [
+            'nama' => ['required'],
+            'mandarin' => ['required'],
+            'jenis_kelamin' => ['required'],
+            'umur' => ['required', 'numeric', 'min:1', 'max:150'],
+            'alamat' => ['required'],
+            'kota' => ['required'],
+            'telp' => ['nullable', 'numeric', 'min_digits:9', 'max_digits:13'],
+            'hp' => ['nullable', 'numeric'],
+            'email' => ['nullable', 'email'],
+            'tgl_mohonTao' => ['date'],
+            'keterangan' => ['nullable'],
+            'cabang_id' => ['required']
+        ]);
+
+        //Update process
+        $datapelita = DataPelita::find($id);
+        $datapelita->nama =  $request->nama;
+        $datapelita->mandarin = $request->mandarin;
+        $datapelita->jenis_kelamin = $request->jenis_kelamin;
+        $datapelita->umur = $request->umur;
+        $datapelita->alamat = $request->alamat;
+        $datapelita->kota = $request->kota;
+        $datapelita->telp = $request->telp;
+        $datapelita->hp = $request->hp;
+        $datapelita->email = $request->email;
+        $datapelita->tgl_mohonTao = $request->tgl_mohonTao;
+        $datapelita->keterangan = $request->keterangan;
+        $datapelita->cabang_id = $request->cabang_id;
+
+        $datapelita->save();
+
+        return redirect()->Route('datapelita.index');
     }
 
     /**

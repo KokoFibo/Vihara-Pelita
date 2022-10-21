@@ -18,6 +18,7 @@ export default {
   props: {
     datapelita: Object,
     filters: Object,
+    msg: String,
   },
 
   data() {
@@ -98,6 +99,7 @@ export default {
                     <th>中文名</th>
                     <th>Umur</th>
                     <th>Tgl Chiu Tao</th>
+                    <th>Jenis Kelamin</th>
                     <th>
                       <Link :href="route('datapelita.create')" class="btn btn-xs btn-success">Add</Link>
 
@@ -111,14 +113,15 @@ export default {
                     <td>{{ d.mandarin }}</td>
                     <td>{{ umur_sekarang(d.tgl_mohonTao, d.umur ) }}</td>
                     <td>{{ d.tgl_mohonTao }}</td>
+                    <td>{{ d.jenis_kelamin }}</td>
                     <td>
                       <div class="btn-group">
-                        <button class="btn btn-xs btn-info">
-                          Show
-                        </button>
-                        <button class="btn btn-xs btn-warning">
-                          Edit
-                        </button>
+                        <Link :href="route('datapelita.show', d.id)" class="btn btn-xs btn-info">
+                        Show
+                        </Link>
+                        <Link :href="route('datapelita.edit', d.id)" class="btn btn-xs btn-warning">
+                        Edit
+                        </Link>
                         <Link :href="route('datapelita.destroy', d.id)" class="btn btn-xs btn-error" method="delete">
                         Delete</Link>
                       </div>
