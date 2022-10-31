@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\DataPelita::factory(15)->create();
+        \App\Models\DataPelita::factory(500)->create();
 
         \App\Models\Cabang::factory()->create(
             [
