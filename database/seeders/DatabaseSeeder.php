@@ -18,10 +18,15 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Cabang::factory()->create(
             [
-                'kode_id' => 'JKT-01',
-                'negara' => 'Indonesia',
-                'kota' => 'Jakarta',
+                'kota_id' => '1',
                 'daerah' => 'BNI'
+            ],
+
+        );
+        \App\Models\Kota::factory()->create(
+            [
+               
+                'kota' => 'Jakarta'
             ],
 
         );

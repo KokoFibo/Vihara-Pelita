@@ -21,7 +21,7 @@ class PelitaIndexController extends Controller
                 $query->where('nama', 'like', '%' . $search . '%' )
                 ->orWhere('mandarin', 'like', '%' . $search . '%' );
             })
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString()
             ->through(fn($datapelita) => [
                 'id' =>$datapelita->id,

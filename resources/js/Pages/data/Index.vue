@@ -42,6 +42,13 @@ function umur_sekarang(dt, umur) {
     var y1 = yesterday.getFullYear();
     return y2 - y1 + umur;
 }
+
+function check_JK(jk, umur) {
+    if (jk == 1 && umur <= 16) return "童 - Anak Laki-Laki";
+    else if (jk == 1 && umur > 16) return "乾 - Laki-Laki";
+    else if (jk == 2 && umur <= 16) return "女 - Anak Perempuan";
+    else return "坤 - Perempuan";
+}
 </script>
 
 <template>
@@ -124,7 +131,17 @@ function umur_sekarang(dt, umur) {
                                             }}
                                         </td>
                                         <td>{{ d.tgl_mohonTao }}</td>
-                                        <td>{{ d.jenis_kelamin }}</td>
+                                        <td>
+                                            {{
+                                                check_JK(
+                                                    d.jenis_kelamin,
+                                                    umur_sekarang(
+                                                        d.tgl_mohonTao,
+                                                        d.umur
+                                                    )
+                                                )
+                                            }}
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                                 <Link
@@ -168,6 +185,40 @@ function umur_sekarang(dt, umur) {
                             </table>
                         </div>
                         <!-- Table End -->
+                        <div class="mt-5 flex justify-between">
+                            <div class="mt-2">
+                                <div>Per page:</div>
+                                <select class="select select-info max-w-xs">
+                                    <option disabled selected>10</option>
+                                    <option>5</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>25</option>
+                                </select>
+                            </div>
+
+                            <div class="mt-2 ml-5">
+                                <div>Umur:</div>
+                                <input type="text" placeholder="10-50" />
+                            </div>
+                            <div class="mt-2 ml-5">
+                                <div>Tanggal chiu Tao</div>
+                                <input type="date" /> -
+                                <input type="date" />
+                            </div>
+                            <div class="mt-2 ml-5">
+                                <div>Jenis Kelamin:</div>
+                                <select class="select select-info max-w-xs">
+                                    <option disabled selected>Semua</option>
+                                    <option>Semua</option>
+                                    <option>乾 - Laki-Laki</option>
+                                    <option>坤 - Perempuan</option>
+                                    <option>童 - Anak Laki-Laki</option>
+                                    <option>女 - Anak Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@ class DataPelitaFactory extends Factory
         return [
             'nama' => fake()->name,
             'mandarin' => fake('zh_TW')->name, 
-            'jenis_kelamin' => fake()->numberBetween(1,4), 
+            'jenis_kelamin' => fake()->numberBetween(1,2), 
             'umur' => fake()->numberBetween(1,99),
             'alamat' => fake()->address,
             'kota' => fake()->city,

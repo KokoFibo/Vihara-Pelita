@@ -27,4 +27,6 @@ class DataPelita extends Model
     {
         return $this->belongsTo(Cabang::class);
     }
+    
+
 }

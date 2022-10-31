@@ -19,4 +19,8 @@ class Cabang extends Model
     {
         return $this->hasMany(DataPelita::class);
     }
+    public function kota()
+    {
+        return $this->belongsTo(Kota::class);
+    }
 }
