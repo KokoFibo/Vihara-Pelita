@@ -11,21 +11,21 @@ use Illuminate\Http\Request;
 class DataPelitaController extends Controller
 {
 
-    public function index()
-    {
+    // public function index()
+    // {
 
-        $query = DataPelita::query();
+    //     $query = DataPelita::query();
 
-        if (request('search')) {
-            $query->where('nama', 'LIKE', '%' . request('search') . '%');
-        }
+    //     if (request('search')) {
+    //         $query->where('nama', 'LIKE', '%' . request('search') . '%');
+    //     }
 
-        return Inertia::render('data/Index', [
-            'datapelita' => $query->paginate(10),
+    //     return Inertia::render('data/Index', [
+    //         'datapelita' => $query->paginate(10),
 
-            'filters' => request()->all(['search'])
-        ]);
-    }
+    //         'filters' => request()->all(['search'])
+    //     ]);
+    // }
 
 
     public function create()

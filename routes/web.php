@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\DataPelitaController;
-use App\Models\DataPelita;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\DataPelita;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\DataPelitaController;
+use App\Http\Controllers\PelitaIndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/datapelita/{id}/update', [DataPelitaController::class, 'update'])->name('datapelita.update');
     Route::get('/datapelita/{id}/edit', [DataPelitaController::class, 'edit'])->name('datapelita.edit');
     Route::get('/datapelita/{id}/show', [DataPelitaController::class, 'show'])->name('datapelita.show');
-    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita.index');
+    Route::get('/datapelita', [PelitaIndexController::class, 'index'])->name('datapelita.index');
 });
 
 
