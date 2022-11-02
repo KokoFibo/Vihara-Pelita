@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use App\Models\DataPelita;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\KotaController;
 use App\Http\Controllers\DataPelitaController;
 use App\Http\Controllers\PelitaIndexController;
 
@@ -44,9 +45,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Daerah/Index');
     })->name('daerah.index');
 
-    Route::get('/kota', function () {
-        return Inertia::render('Kota/Index');
-    })->name('kota.index');
+    
+    // Route::get('/kota', [KotaController::class, 'index'])->name('kota.index');
+    // Route::post('/kota/store', [KotaController::class, 'store'])->name('kota/store');
+
+    Route::resource('/kota', KotaController::class)->except('show');
+
 
     Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');
     Route::post('/datapelita/store', [DataPelitaController::class, 'store'])->name('datapelita.store');

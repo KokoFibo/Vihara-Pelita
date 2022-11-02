@@ -75,7 +75,9 @@ function check_JK(jk, umur) {
                             <Link href="/daerah" class="tab tab-lifted"
                                 >Tambah Daerah</Link
                             >
-                            <Link href="/kota" class="tab tab-lifted"
+                            <Link
+                                :href="route('kota.index')"
+                                class="tab tab-lifted"
                                 >Tambah Kota</Link
                             >
                         </div>

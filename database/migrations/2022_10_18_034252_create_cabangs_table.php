@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cabangs', function (Blueprint $table) {
             $table->id();
             $table->string('kota_id');
-            $table->string('daerah');
+            $table->string('daerah')->unique();
             $table->timestamps();
         });
     }
