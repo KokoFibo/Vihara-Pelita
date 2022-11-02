@@ -47,9 +47,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('daerah.index');
 
     
-    // Route::get('/kota', [KotaController::class, 'index'])->name('kota.index');
-    // Route::post('/kota/store', [KotaController::class, 'store'])->name('kota/store');
-
     Route::resource('/kota', KotaController::class)->except('show');
 
     Route::resource('/branch', BranchController::class)->except('show');
