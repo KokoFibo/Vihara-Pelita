@@ -102,7 +102,7 @@ const props = defineProps({
                             </div>
                             <button
                                 type="submit"
-                                class="bg-blue-500 text-white hover:bg-blue-700 rounded-lg my-2 px-2"
+                                class="bg-blue-500 text-white hover:bg-blue-700 rounded-lg mx-2 px-3 py-1"
                             >
                                 Save
                             </button>

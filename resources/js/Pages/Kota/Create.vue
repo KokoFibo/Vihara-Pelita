@@ -29,7 +29,9 @@ const props = defineProps({
                             <Link href="/datapelita" class="tab tab-lifted"
                                 >Master Data</Link
                             >
-                            <Link href="/daerah" class="tab tab-lifted"
+                            <Link
+                                :href="route('branch.index')"
+                                class="tab tab-lifted"
                                 >Tambah Daerah</Link
                             >
                             <Link href="/kota" class="tab tab-lifted tab-active"
@@ -62,11 +64,13 @@ const props = defineProps({
                                     <div class="card-actions justify-end">
                                         <button
                                             type="submit"
-                                            class="btn btn-success"
+                                            class="bg-blue-500 text-white hover:bg-blue-700 rounded-lg mx-2 px-3 py-1"
                                         >
                                             Save
                                         </button>
-                                        <Link :href="route('kota.index')"
+                                        <Link
+                                            :href="route('kota.index')"
+                                            class="bg-orange-500 text-white hover:bg-orange-700 mx-2 px-3 py-1 rounded-lg"
                                             >Cancel</Link
                                         >
                                     </div>
