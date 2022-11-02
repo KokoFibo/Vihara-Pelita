@@ -16,19 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\DataPelita::factory(500)->create();
 
-        \App\Models\Cabang::factory()->create(
-            [
-                'kota_id' => '1',
-                'daerah' => 'BNI'
-            ],
+        
 
-        );
-        \App\Models\Kota::factory()->create(
-            [
+        // \App\Models\Kota::factory()->create(
+        //     [
                
-                'kota' => 'Jakarta'
-            ],
+        //         'kota' => 'Jakarta'
+        //     ],
 
-        );
+        // );
     }
 }

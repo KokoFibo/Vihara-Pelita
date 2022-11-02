@@ -5,16 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cabang extends Model
+class Branch extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'kode_id',
-        'negara',
-        'kota',
-        'daerah'
-    ];
-
+    use HasFactory; 
+    protected $fillable = ['kota_id', 'branch', 'kode_branch'];
     public function datapelita()
     {
         return $this->hasMany(DataPelita::class);

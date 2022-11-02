@@ -72,8 +72,10 @@ function check_JK(jk, umur) {
                                 class="tab tab-lifted tab-active"
                                 >Master Data</Link
                             >
-                            <Link href="/daerah" class="tab tab-lifted"
-                                >Tambah Daerah</Link
+                            <Link
+                                :href="route('branch.index')"
+                                class="tab tab-lifted"
+                                >Tambah Branch</Link
                             >
                             <Link
                                 :href="route('kota.index')"

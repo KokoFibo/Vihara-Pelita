@@ -5,6 +5,7 @@ use App\Models\DataPelita;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\KotaController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DataPelitaController;
 use App\Http\Controllers\PelitaIndexController;
 
@@ -50,6 +51,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::post('/kota/store', [KotaController::class, 'store'])->name('kota/store');
 
     Route::resource('/kota', KotaController::class)->except('show');
+
+    Route::resource('/branch', BranchController::class)->except('show');
 
 
     Route::get('/datapelita/create', [DataPelitaController::class, 'create'])->name('datapelita.create');

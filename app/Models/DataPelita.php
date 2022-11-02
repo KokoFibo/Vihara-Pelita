@@ -23,9 +23,9 @@ class DataPelita extends Model
         'cabang_id'
     ];
 
-    public function cabang()
+    public function branch()
     {
-        return $this->belongsTo(Cabang::class);
+        return $this->belongsTo(Branch::class);
     }
     
 

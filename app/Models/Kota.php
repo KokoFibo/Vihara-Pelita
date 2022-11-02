@@ -10,7 +10,7 @@ class Kota extends Model
     use HasFactory;
     protected $fillable = ['kota'];
 
-    public function cabang() {
-        return $this->hasMany(Cabang::class);
+    public function branch() {
+        return $this->hasMany(Branch::class);
     }
 }

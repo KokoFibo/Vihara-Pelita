@@ -29,7 +29,7 @@ const props = defineProps({
                             <Link href="/datapelita" class="tab tab-lifted"
                                 >Master Data</Link
                             >
-                            <Link href="/daerah" class="tab tab-lifted"
+                            <Link href="/branch" class="tab tab-lifted"
                                 >Tambah Daerah</Link
                             >
                             <Link href="/kota" class="tab tab-lifted tab-active"
