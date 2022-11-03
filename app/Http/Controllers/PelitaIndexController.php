@@ -10,6 +10,7 @@ class PelitaIndexController extends Controller
 {
     public function index()
     {
+        $perPage = Request::input('perPage') ?: 10;
         $query = DataPelita::query();
         // return Inertia::render('Customer/Index', [
         //     'customer' => Customer::paginate(5)
@@ -21,7 +22,7 @@ class PelitaIndexController extends Controller
                 $query->where('nama', 'like', '%' . $search . '%' )
                 ->orWhere('mandarin', 'like', '%' . $search . '%' );
             })
-            ->paginate(10)
+            ->paginate($perPage)
             ->withQueryString()
             ->through(fn($datapelita) => [
                 'id' =>$datapelita->id,
@@ -31,7 +32,7 @@ class PelitaIndexController extends Controller
                 'tgl_mohonTao' =>$datapelita->tgl_mohonTao,
                 'jenis_kelamin' =>$datapelita->jenis_kelamin,
             ]),
-            'filters' => Request::only(['search'])
+            'filters' => Request::only(['search', 'perPage'])
         ]);
     }
-}
+} 
