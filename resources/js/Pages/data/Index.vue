@@ -2,7 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
-import { ref, watch, defineProps } from "vue";
+import { ref, watch } from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import debounce from "lodash/debounce";
 
