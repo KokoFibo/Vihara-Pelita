@@ -2,37 +2,74 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from "@inertiajs/inertia";
-import { ref, watch } from "vue";
+import { ref, watch, reactive } from "vue";
 import Pagination from "@/Components/Pagination.vue";
-import debounce from "lodash/debounce";
+import { debounce, pickBy } from "lodash";
+
+const pelitaFilters = reactive({
+    search: props.filters.search,
+    perPage: props.filters.perPage,
+    column: props.filters.column,
+    direction: props.filters.direction,
+    jenisKelamin: props.filters.jenisKelamin,
+});
 
 const props = defineProps({
     datapelita: Object,
     filters: Object,
 });
 
-const perPage = ref(10);
-
-let search = ref(props.filters.search);
-
 watch(
-    search,
-    debounce(function (value) {
+    pelitaFilters,
+    debounce(() => {
+        let query = pickBy(pelitaFilters);
+        let queryRoute = route(
+            "datapelita.index",
+            Object.keys(query).length ? query : { remember: "forget" }
+        );
+
         Inertia.get(
-            "/datapelita",
-            { search: value, prePage: perPage.value },
+            queryRoute,
+            {},
             {
                 preserveState: true,
                 replace: true,
             }
         );
-    }, 300)
+    }, 300),
+    {
+        deep: true,
+    }
 );
+function sort(col) {
+    pelitaFilters.column = col;
+    pelitaFilters.direction =
+        pelitaFilters.direction === "asc" ? "desc" : "asc";
+}
 
 function getPage() {
     Inertia.get(
-        "/datapelita",
-        { perPage: perPage.value, search: search.value },
+        "route('datapelita.index')",
+        {
+            perPage: pelitaFilters.perPage,
+            search: pelitaFilters.search,
+            jenisKelamin: pelitaFilters.jenisKelamin,
+        },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+}
+
+function getJenisKelamin() {
+    Inertia.get(
+        "route('datapelita.index')",
+        {
+            perPage: pelitaFilters.perPage,
+            search: pelitaFilters.search,
+            jenisKelamin: pelitaFilters.jenisKelamin,
+        },
         {
             preserveState: true,
             replace: true,
@@ -102,7 +139,7 @@ function check_JK(jk, umur) {
 
                         <input
                             type="text"
-                            v-model="search"
+                            v-model="pelitaFilters.search"
                             placeholder="Search..."
                             class="input input-bordered input-sm w-full max-w-xs mr-5"
                         />
@@ -115,9 +152,105 @@ function check_JK(jk, umur) {
                             >
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
+                                        <th @click="sort('nama')">
+                                            <div
+                                                class="flex space-x4 content-center items-center"
+                                            >
+                                                <span>Nama</span>
+
+                                                <svg
+                                                    v-if="
+                                                        pelitaFilters.column ==
+                                                            'nama' &&
+                                                        pelitaFilters.direction ==
+                                                            'desc'
+                                                    "
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor"
+                                                    class="w-4 h-4"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+                                                    />
+                                                </svg>
+                                                <!-- icon Asc -->
+                                                <svg
+                                                    v-if="
+                                                        pelitaFilters.column ==
+                                                            'nama' &&
+                                                        pelitaFilters.direction ==
+                                                            'asc'
+                                                    "
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor"
+                                                    class="w-4 h-4"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </th>
                                         <th>中文名</th>
-                                        <th>Umur</th>
+                                        <th @click="sort('umur')">
+                                            <div
+                                                class="flex space-x4 content-center items-center"
+                                            >
+                                                <span>Umur</span>
+                                                <!-- icon Desc -->
+                                                <svg
+                                                    v-if="
+                                                        pelitaFilters.column ==
+                                                            'umur' &&
+                                                        pelitaFilters.direction ==
+                                                            'desc'
+                                                    "
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor"
+                                                    class="w-4 h-4"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+                                                    />
+                                                </svg>
+                                                <!-- icon Asc -->
+                                                <svg
+                                                    v-if="
+                                                        pelitaFilters.column ==
+                                                            'umur' &&
+                                                        pelitaFilters.direction ==
+                                                            'asc'
+                                                    "
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="1.5"
+                                                    stroke="currentColor"
+                                                    class="w-4 h-4"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </th>
                                         <th>Tgl Chiu Tao</th>
                                         <th>Jenis Kelamin</th>
                                         <th>
@@ -205,8 +338,8 @@ function check_JK(jk, umur) {
                             <div class="mt-2">
                                 <div>Per Page:</div>
                                 <select
-                                    v-model="perPage"
-                                    @change="getPage"
+                                    v-model="pelitaFilters.perPage"
+                                    @change="pelitaFilters.getPage"
                                     class="select select-info max-w-xs"
                                 >
                                     <option disabled selected>10</option>
@@ -229,13 +362,15 @@ function check_JK(jk, umur) {
                             </div>
                             <div class="mt-2 ml-5">
                                 <div>Jenis Kelamin:</div>
-                                <select class="select select-info max-w-xs">
+                                <select
+                                    v-model="pelitaFilters.jenisKelamin"
+                                    @change="pelitaFilters.getJenisKelamin"
+                                    class="select select-info max-w-xs"
+                                >
                                     <option disabled selected>Semua</option>
                                     <option>Semua</option>
-                                    <option>乾 - Laki-Laki</option>
-                                    <option>坤 - Perempuan</option>
-                                    <option>童 - Anak Laki-Laki</option>
-                                    <option>女 - Anak Perempuan</option>
+                                    <option value="1">乾 - Laki-Laki</option>
+                                    <option value="2">坤 - Perempuan</option>
                                 </select>
                             </div>
                         </div>
