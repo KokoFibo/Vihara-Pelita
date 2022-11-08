@@ -58,7 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/datapelita/{id}/update', [DataPelitaController::class, 'update'])->name('datapelita.update');
     Route::get('/datapelita/{id}/edit', [DataPelitaController::class, 'edit'])->name('datapelita.edit');
     Route::get('/datapelita/{id}/show', [DataPelitaController::class, 'show'])->name('datapelita.show');
-    Route::get('/datapelita', [PelitaIndexController::class, 'index'])->name('datapelita.index');
+    Route::get('/datapelita', [DataPelitaController::class, 'index'])->name('datapelita.index');
 });
 
 
