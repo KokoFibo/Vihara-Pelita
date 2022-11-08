@@ -12,20 +12,20 @@ class PelitaIndexController extends Controller
     {
         $perPage = Request::input('perPage') ?: 10;
         $query = DataPelita::query();
-        // return Inertia::render('Customer/Index', [
-        //     'customer' => Customer::paginate(5)
-        // ]);
+        
 
         return Inertia::render('data/Index', [
             'datapelita' => DataPelita::query()
+            ->when(Request::has('jenisKelamin'), function($query) {
+                $query->where('jenis_kelamin', Request::input('jenisKelamin'));
+           })
             ->when(Request::input('search')  , function($query, $search) {
                 $query->where('nama', 'like', '%' . $search . '%' )
                 ->orWhere('mandarin', 'like', '%' . $search . '%' );
                 
+                
             })
-            ->when(Request::has('jenisKelamin'), function($query) {
-                $query->where('jenis_kelamin','=', Request::input('jenisKelamin'));
-            })
+           
             ->when(Request::has('column'), function($query){
                 $query->orderBy(Request::input('column'), Request::input('direction'));
             })
@@ -39,7 +39,7 @@ class PelitaIndexController extends Controller
                 'tgl_mohonTao' =>$datapelita->tgl_mohonTao,
                 'jenis_kelamin' =>$datapelita->jenis_kelamin,
             ]),
-            'filters' => Request::only(['search', 'perPage', 'column', 'direction'])
+            'filters' => Request::only(['search', 'perPage', 'column', 'direction', 'jenisKelamin'])
         ]);
         
 

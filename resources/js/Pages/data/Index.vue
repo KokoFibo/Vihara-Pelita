@@ -75,6 +75,7 @@ function getJenisKelamin() {
             replace: true,
         }
     );
+    console.log(perPage, search, jenisKelamin);
 }
 
 function showAdd() {
@@ -368,7 +369,7 @@ function check_JK(jk, umur) {
                                     class="select select-info max-w-xs"
                                 >
                                     <option disabled selected>Semua</option>
-                                    <option>Semua</option>
+                                    <option value="">Semua</option>
                                     <option value="1">乾 - Laki-Laki</option>
                                     <option value="2">坤 - Perempuan</option>
                                 </select>
