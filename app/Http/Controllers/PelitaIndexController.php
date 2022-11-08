@@ -4,30 +4,34 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\DataPelita;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 class PelitaIndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $perPage = Request::input('perPage') ?: 10;
+        request()->validate([
+            'direction' => ['in:asc,desc'],
+            'column' => ['in:nama,umur'],
+            'jenisKelamin' => ['in:1,2'],
+        ]);
+        $perPage = request('perPage') ?: 10;
         $query = DataPelita::query();
         
 
         return Inertia::render('data/Index', [
             'datapelita' => DataPelita::query()
-            ->when(Request::has('jenisKelamin'), function($query) {
-                $query->where('jenis_kelamin', Request::input('jenisKelamin'));
+            ->when(request('jenisKelamin'), function($query) {
+                $query->where('jenis_kelamin', request('jenisKelamin'));
            })
-            ->when(Request::input('search')  , function($query, $search) {
+            ->when(request('search')  , function($query, $search) {
                 $query->where('nama', 'like', '%' . $search . '%' )
                 ->orWhere('mandarin', 'like', '%' . $search . '%' );
-                
-                
             })
            
-            ->when(Request::has('column'), function($query){
-                $query->orderBy(Request::input('column'), Request::input('direction'));
+            ->when(request('column'), function($query){
+                $query->orderBy(request('column'), request('direction'));
             })
             ->paginate($perPage)
             ->withQueryString()
@@ -39,7 +43,7 @@ class PelitaIndexController extends Controller
                 'tgl_mohonTao' =>$datapelita->tgl_mohonTao,
                 'jenis_kelamin' =>$datapelita->jenis_kelamin,
             ]),
-            'filters' => Request::only(['search', 'perPage', 'column', 'direction', 'jenisKelamin'])
+            'filters' => $request->only(['search', 'perPage', 'column', 'direction', 'jenisKelamin'])
         ]);
         
 

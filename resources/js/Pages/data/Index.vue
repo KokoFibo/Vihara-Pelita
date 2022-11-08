@@ -153,11 +153,11 @@ function check_JK(jk, umur) {
                             >
                                 <thead>
                                     <tr>
-                                        <th @click="sort('nama')">
-                                            <div
-                                                class="flex space-x4 content-center items-center"
-                                            >
-                                                <span>Nama</span>
+                                        <th class="bg-purple-500 text-white">
+                                            <span
+                                                class="inline-flex w-full justify-between"
+                                                @click="sort('nama')"
+                                                >Nama
 
                                                 <svg
                                                     v-if="
@@ -200,14 +200,16 @@ function check_JK(jk, umur) {
                                                         d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
                                                     />
                                                 </svg>
-                                            </div>
+                                            </span>
                                         </th>
-                                        <th>中文名</th>
-                                        <th @click="sort('umur')">
-                                            <div
-                                                class="flex space-x4 content-center items-center"
-                                            >
-                                                <span>Umur</span>
+                                        <th class="bg-purple-500 text-white">
+                                            中文名
+                                        </th>
+                                        <th class="bg-purple-500 text-white">
+                                            <span
+                                                class="inline-flex w-full justify-between"
+                                                @click="sort('umur')"
+                                                >Umur
                                                 <!-- icon Desc -->
                                                 <svg
                                                     v-if="
@@ -250,11 +252,15 @@ function check_JK(jk, umur) {
                                                         d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18"
                                                     />
                                                 </svg>
-                                            </div>
+                                            </span>
                                         </th>
-                                        <th>Tgl Chiu Tao</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>
+                                        <th class="bg-purple-500 text-white">
+                                            Tgl Chiu Tao
+                                        </th>
+                                        <th class="bg-purple-500 text-white">
+                                            Jenis Kelamin
+                                        </th>
+                                        <th class="bg-purple-500 text-white">
                                             <Link
                                                 :href="
                                                     route('datapelita.create')
