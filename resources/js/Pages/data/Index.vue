@@ -484,6 +484,7 @@ function check_JK(jk, umur) {
 </template>
 
 <style>
+.showAdd,
 .showEdit {
     display: none;
 }
