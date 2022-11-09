@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Inertia\Inertia;
 use App\Models\Cabang;
+use Carbon\Traits\Date;
 use App\Models\DataPelita;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class DataPelitaController extends Controller
@@ -21,11 +23,30 @@ class DataPelitaController extends Controller
         $perPage = request('perPage') ?: 10;
         $query = DataPelita::query();
         
-
+         
+        
         return Inertia::render('data/Index', [
             'datapelita' => DataPelita::query()
+            ->when(request('umur1'), function($query, $umur1) {
+                $query->where('umur_sekarang','>=', $umur1 );
+            })
+            ->when(request('umur2'), function($query,  $umur2) {
+                $query->where('umur_sekarang','<=', $umur2 );
+                
+            })
+            ->when(request('tgl1'), function($query,  $tgl1) {
+                $query->where('tgl_mohonTao','>=', $tgl1 );
+                
+            })
+            ->when(request('tgl2'), function($query,  $tgl2) {
+                $query->where('tgl_mohonTao','<=', $tgl2 );
+                
+            })
+           
+            
             ->when(request('jenisKelamin'), function($query) {
                 $query->where('jenis_kelamin', request('jenisKelamin'));
+                
            })
             ->when(request('search')  , function($query, $search) {
                 $query->where('nama', 'like', '%' . $search . '%' )
@@ -41,23 +62,26 @@ class DataPelitaController extends Controller
                 'id' =>$datapelita->id,
                 'nama' =>$datapelita->nama,
                 'mandarin' =>$datapelita->mandarin,
-                'umur' =>$datapelita->umur,
+                'umur_sekarang' =>$datapelita->umur_sekarang,
                 'tgl_mohonTao' =>$datapelita->tgl_mohonTao,
                 'jenis_kelamin' =>$datapelita->jenis_kelamin,
             ]),
             // 'filters' => $request->only(['search', 'perPage', 'column', 'direction', 'jenisKelamin'])
-            'filters' => request()->all(['search', 'perPage', 'column', 'direction', 'jenisKelamin'])
+            'filters' => request()->all(['search', 'perPage', 'column', 'direction', 'jenisKelamin', 'umur1', 'umur2', 'tgl1', 'tgl2'])
         ]);
         
 
     }
 
+     
 
     public function create()
     {
         $cabang = Cabang::all();
         return Inertia::render('data/Create', compact('cabang'));
     }
+
+    
 
 
     public function store(Request $request)
@@ -67,13 +91,14 @@ class DataPelitaController extends Controller
             'mandarin' => ['required'],
             'jenis_kelamin' => ['required'],
             'umur' => ['required', 'numeric', 'min:1', 'max:150'],
+            'umur_sekarang' => ['nullable'],
             'alamat' => ['required'],
             'kota' => ['required'],
             'telp' => ['nullable', 'numeric', 'min_digits:9', 'max_digits:13'],
             'hp' => ['nullable', 'numeric'],
             'email' => ['nullable', 'email'],
             'tgl_mohonTao' => ['date'],
-            'keterangan' => ['nullable'],
+            'status' => ['nullable'],
             'cabang_id' => ['required']
         ]);
 
@@ -82,13 +107,14 @@ class DataPelitaController extends Controller
             'mandarin' => $request->mandarin,
             'jenis_kelamin' => $request->jenis_kelamin,
             'umur' => $request->umur,
+            'umur_sekarang' => $request->umur_sekarang,
             'alamat' => $request->alamat,
             'kota' => $request->kota,
             'telp' => $request->telp,
             'hp' => $request->hp,
             'email' => $request->email,
             'tgl_mohonTao' => $request->tgl_mohonTao,
-            'keterangan' => $request->keterangan,
+            'status' => $request->status,
             'cabang_id' => $request->cabang_id,
         ]);
 
@@ -129,13 +155,14 @@ class DataPelitaController extends Controller
             'mandarin' => ['required'],
             'jenis_kelamin' => ['required'],
             'umur' => ['required', 'numeric', 'min:1', 'max:150'],
+            'umur_sekarang' => ['nullable'],
             'alamat' => ['required'],
             'kota' => ['required'],
             'telp' => ['nullable', 'numeric', 'min_digits:9', 'max_digits:13'],
             'hp' => ['nullable', 'numeric'],
             'email' => ['nullable', 'email'],
             'tgl_mohonTao' => ['date'],
-            'keterangan' => ['nullable'],
+            'status' => ['nullable'],
             'cabang_id' => ['required']
         ]);
 
@@ -145,13 +172,14 @@ class DataPelitaController extends Controller
         $datapelita->mandarin = $request->mandarin;
         $datapelita->jenis_kelamin = $request->jenis_kelamin;
         $datapelita->umur = $request->umur;
+        $datapelita->umur_sekarang = $request->umur_sekarang;
         $datapelita->alamat = $request->alamat;
         $datapelita->kota = $request->kota;
         $datapelita->telp = $request->telp;
         $datapelita->hp = $request->hp;
         $datapelita->email = $request->email;
         $datapelita->tgl_mohonTao = $request->tgl_mohonTao;
-        $datapelita->keterangan = $request->keterangan;
+        $datapelita->status = $request->status;
         $datapelita->cabang_id = $request->cabang_id;
 
         $datapelita->save();

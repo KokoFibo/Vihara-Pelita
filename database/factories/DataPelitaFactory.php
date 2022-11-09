@@ -21,13 +21,14 @@ class DataPelitaFactory extends Factory
             'mandarin' => fake('zh_TW')->name, 
             'jenis_kelamin' => fake()->numberBetween(1,2), 
             'umur' => fake()->numberBetween(1,99),
+            'umur_sekarang' => fake()->numberBetween(1,99),
             'alamat' => fake()->address,
             'kota' => fake()->city,
             'telp' => fake()->e164PhoneNumber(),
             'hp' => fake()->e164PhoneNumber(),
             'email' => fake()->email,
             'tgl_mohonTao' => fake()->dateTimeThisDecade(),
-            'keterangan' => fake()->words(2,true),
+            'status' => fake()->words(2,true),
             'cabang_id' => '1'
         ];
     }

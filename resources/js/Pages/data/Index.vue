@@ -12,6 +12,10 @@ const pelitaFilters = reactive({
     column: props.filters.column,
     direction: props.filters.direction,
     jenisKelamin: props.filters.jenisKelamin,
+    umur1: props.filters.umur1,
+    umur2: props.filters.umur2,
+    tgl1: props.filters.tgl1,
+    tgl2: props.filters.tgl2,
 });
 
 const props = defineProps({
@@ -54,6 +58,10 @@ function getPage() {
             perPage: pelitaFilters.perPage,
             search: pelitaFilters.search,
             jenisKelamin: pelitaFilters.jenisKelamin,
+            umur1: pelitaFilters.umur1,
+            umur2: pelitaFilters.umur2,
+            tgl1: pelitaFilters.tgl1,
+            tgl2: pelitaFilters.tgl2,
         },
         {
             preserveState: true,
@@ -61,36 +69,122 @@ function getPage() {
         }
     );
 }
-
-function getJenisKelamin() {
+function getumur1() {
     Inertia.get(
         "route('datapelita.index')",
         {
             perPage: pelitaFilters.perPage,
             search: pelitaFilters.search,
             jenisKelamin: pelitaFilters.jenisKelamin,
+            umur1: pelitaFilters.umur1,
+            umur2: pelitaFilters.umur2,
+            tgl1: pelitaFilters.tgl1,
+            tgl2: pelitaFilters.tgl2,
         },
         {
             preserveState: true,
             replace: true,
         }
     );
-    console.log(perPage, search, jenisKelamin);
+}
+function getumur2() {
+    Inertia.get(
+        "route('datapelita.index')",
+        {
+            perPage: pelitaFilters.perPage,
+            search: pelitaFilters.search,
+            jenisKelamin: pelitaFilters.jenisKelamin,
+            umur1: pelitaFilters.umur1,
+            umur2: pelitaFilters.umur2,
+            tgl1: pelitaFilters.tgl1,
+            tgl2: pelitaFilters.tgl2,
+        },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+}
+
+function getTgl1() {
+    Inertia.get(
+        "route('datapelita.index')",
+        {
+            perPage: pelitaFilters.perPage,
+            search: pelitaFilters.search,
+            jenisKelamin: pelitaFilters.jenisKelamin,
+            umur1: pelitaFilters.umur1,
+            umur2: pelitaFilters.umur2,
+            tgl1: pelitaFilters.tgl1,
+            tgl2: pelitaFilters.tgl2,
+        },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+}
+function getTgl2() {
+    Inertia.get(
+        "route('datapelita.index')",
+        {
+            perPage: pelitaFilters.perPage,
+            search: pelitaFilters.search,
+            jenisKelamin: pelitaFilters.jenisKelamin,
+            umur1: pelitaFilters.umur1,
+            umur2: pelitaFilters.umur2,
+            tgl1: pelitaFilters.tgl1,
+            tgl2: pelitaFilters.tgl2,
+        },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+}
+
+function getJenisKelamin($tgl, $umur) {
+    Inertia.get(
+        "route('datapelita.index')",
+        {
+            perPage: pelitaFilters.perPage,
+            search: pelitaFilters.search,
+            jenisKelamin: pelitaFilters.jenisKelamin,
+            umur1: pelitaFilters.umur1,
+            umur2: pelitaFilters.umur2,
+            tgl1: pelitaFilters.tgl1,
+            tgl2: pelitaFilters.tgl2,
+        },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+}
+
+function reset() {
+    Inertia.get(
+        "route('datapelita.index')"
+        //{
+        // perPage: "",
+        // search: "",
+        // jenisKelamin: "",
+        // umur1: "",
+        // umur2: "",
+        // tgl1: "",
+        // tgl2: "",
+        //}
+        // {
+        //     preserveState: true,
+        //     replace: true,
+        // }
+    );
 }
 
 function showAdd() {
     alert("test1");
     document.querySelector(".showAdd").style.display = "none";
     document.querySelector(".showAdd").style.display = "inline";
-}
-
-function umur_sekarang(dt, umur) {
-    var today = new Date();
-    var yesterday = new Date(dt);
-
-    var y2 = today.getFullYear();
-    var y1 = yesterday.getFullYear();
-    return y2 - y1 + umur;
 }
 
 function check_JK(jk, umur) {
@@ -145,6 +239,12 @@ function check_JK(jk, umur) {
                             class="input input-bordered input-sm w-full max-w-xs mr-5"
                         />
                         <Pagination :pagination="datapelita" />
+                        <button
+                            class="bg-blue-500 text-white rounded-lg hover:bg-blue-700 px-2 py-1"
+                            @click="reset"
+                        >
+                            Reset
+                        </button>
 
                         <!-- Table Start -->
                         <div class="overflow-x-auto">
@@ -278,23 +378,13 @@ function check_JK(jk, umur) {
                                     >
                                         <td>{{ d.nama }}</td>
                                         <td>{{ d.mandarin }}</td>
-                                        <td>
-                                            {{
-                                                umur_sekarang(
-                                                    d.tgl_mohonTao,
-                                                    d.umur
-                                                )
-                                            }}
-                                        </td>
+                                        <td>{{ d.umur_sekarang }}</td>
                                         <td>{{ d.tgl_mohonTao }}</td>
                                         <td>
                                             {{
                                                 check_JK(
                                                     d.jenis_kelamin,
-                                                    umur_sekarang(
-                                                        d.tgl_mohonTao,
-                                                        d.umur
-                                                    )
+                                                    d.umur_sekarang
                                                 )
                                             }}
                                         </td>
@@ -360,12 +450,35 @@ function check_JK(jk, umur) {
 
                             <div class="mt-2 ml-5">
                                 <div>Umur:</div>
-                                <input type="text" placeholder="10-50" />
+                                <input
+                                    class="w-14 rounded-lg"
+                                    v-model="pelitaFilters.umur1"
+                                    @change="pelitaFilters.getumur1"
+                                    type="text"
+                                />
+                                -
+                                <input
+                                    class="w-14 rounded-lg"
+                                    v-model="pelitaFilters.umur2"
+                                    @change="pelitaFilters.getumur2"
+                                    type="text"
+                                />
                             </div>
                             <div class="mt-2 ml-5">
                                 <div>Tanggal chiu Tao</div>
-                                <input type="date" /> -
-                                <input type="date" />
+                                <input
+                                    v-model="pelitaFilters.tgl1"
+                                    @change="pelitaFilters.getTgl1"
+                                    class="rounded-lg"
+                                    type="date"
+                                />
+                                -
+                                <input
+                                    v-model="pelitaFilters.tgl2"
+                                    @change="pelitaFilters.getTgl2"
+                                    class="rounded-lg"
+                                    type="date"
+                                />
                             </div>
                             <div class="mt-2 ml-5">
                                 <div>Jenis Kelamin:</div>

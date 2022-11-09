@@ -1,10 +1,12 @@
 <?php
 
+use Carbon\Carbon;
 use Inertia\Inertia;
 use App\Models\DataPelita;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\KotaController;
+use App\Http\Controllers\LoadController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DataPelitaController;
 use App\Http\Controllers\PelitaIndexController;
@@ -21,6 +23,15 @@ use App\Http\Controllers\PelitaIndexController;
 */
 
 Route::get('/', function () {
+    $data = DataPelita::all();
+        foreach($data as $d ){
+            $now = Carbon::now();
+            $tahun = $now->year;
+            $year = date('Y', strtotime($d->tgl_mohonTao));
+            $selisih = $tahun - $year;
+            $d->umur_sekarang = $d->umur + $selisih;
+            $d->save();
+        }
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -28,6 +39,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 
 
 

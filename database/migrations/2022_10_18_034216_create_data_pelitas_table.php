@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('mandarin')->nullable();
             $table->string('jenis_kelamin');
             $table->integer('umur');
+            $table->integer('umur_sekarang')->nullable();
             $table->string('alamat');
             $table->string('kota');
             $table->string('telp')->nullable();;
             $table->string('hp')->nullable();;
             $table->string('email')->nullable();;
             $table->date('tgl_mohonTao');
-            $table->string('keterangan')->nullable();;
+            $table->string('status')->nullable();;
             $table->timestamps();
         });
     }

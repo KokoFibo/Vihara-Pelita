@@ -13,13 +13,14 @@ class DataPelita extends Model
         'mandarin',
         'jenis_kelamin',
         'umur',
+        'umur_sekarang',
         'alamat',
         'kota',
         'telp',
         'hp',
         'email',
         'tgl_mohonTao',
-        'keterangan',
+        'status',
         'cabang_id'
     ];
 
