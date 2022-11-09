@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('data_pelitas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cabang_id');
+            $table->foreignId('branch_id');
 
             $table->string('nama');
             $table->string('mandarin')->nullable();

@@ -29,7 +29,7 @@ class DataPelitaFactory extends Factory
             'email' => fake()->email,
             'tgl_mohonTao' => fake()->dateTimeThisDecade(),
             'status' => fake()->words(2,true),
-            'cabang_id' => '1'
+            'branch_id' => '1'
         ];
     }
 }

@@ -162,25 +162,6 @@ function getJenisKelamin($tgl, $umur) {
     );
 }
 
-function reset() {
-    Inertia.get(
-        "route('datapelita.index')"
-        //{
-        // perPage: "",
-        // search: "",
-        // jenisKelamin: "",
-        // umur1: "",
-        // umur2: "",
-        // tgl1: "",
-        // tgl2: "",
-        //}
-        // {
-        //     preserveState: true,
-        //     replace: true,
-        // }
-    );
-}
-
 function showAdd() {
     alert("test1");
     document.querySelector(".showAdd").style.display = "none";
@@ -239,12 +220,12 @@ function check_JK(jk, umur) {
                             class="input input-bordered input-sm w-full max-w-xs mr-5"
                         />
                         <Pagination :pagination="datapelita" />
-                        <button
+                        <Link
                             class="bg-blue-500 text-white rounded-lg hover:bg-blue-700 px-2 py-1"
-                            @click="reset"
+                            :href="route('datapelita.index')"
                         >
                             Reset
-                        </button>
+                        </Link>
 
                         <!-- Table Start -->
                         <div class="overflow-x-auto">
@@ -503,7 +484,6 @@ function check_JK(jk, umur) {
 </template>
 
 <style>
-.showAdd,
 .showEdit {
     display: none;
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Inertia\Inertia;
+use App\Models\Branch;
 use App\Models\Cabang;
 use Carbon\Traits\Date;
 use App\Models\DataPelita;
@@ -77,8 +78,8 @@ class DataPelitaController extends Controller
 
     public function create()
     {
-        $cabang = Cabang::all();
-        return Inertia::render('data/Create', compact('cabang'));
+        $branch = Branch::all();
+        return Inertia::render('data/Create', compact('branch'));
     }
 
     
@@ -99,25 +100,31 @@ class DataPelitaController extends Controller
             'email' => ['nullable', 'email'],
             'tgl_mohonTao' => ['date'],
             'status' => ['nullable'],
-            'cabang_id' => ['required']
+            'branch_id' => ['required']
         ]);
 
+        $status = $request->status;
+        if ($status == null) {
+            $status == 'Active';
+        }
+        
         DataPelita::create([
             'nama' => $request->nama,
             'mandarin' => $request->mandarin,
             'jenis_kelamin' => $request->jenis_kelamin,
             'umur' => $request->umur,
-            'umur_sekarang' => $request->umur_sekarang,
+            'umur_sekarang' => $this->hitungUmurSekarang($request->tgl_mohonTao, $request->umur),
             'alamat' => $request->alamat,
             'kota' => $request->kota,
             'telp' => $request->telp,
             'hp' => $request->hp,
             'email' => $request->email,
             'tgl_mohonTao' => $request->tgl_mohonTao,
-            'status' => $request->status,
-            'cabang_id' => $request->cabang_id,
+            'status' => $this->checkStatus($request->status),
+            // 'status' => $request->status,
+            'branch_id' => $request->branch_id,
         ]);
-
+        
         return redirect()->route('datapelita.index');
     }
 
@@ -135,9 +142,9 @@ class DataPelitaController extends Controller
      */
     public function edit($id)
     {
-        $cabang = Cabang::all();
+        $branch = Branch::all();
         $datapelita = DataPelita::find($id);
-        return Inertia::render('data/Edit', compact(['datapelita', 'cabang']));
+        return Inertia::render('data/Edit', compact(['datapelita', 'branch']));
     }
 
     /**
@@ -163,7 +170,7 @@ class DataPelitaController extends Controller
             'email' => ['nullable', 'email'],
             'tgl_mohonTao' => ['date'],
             'status' => ['nullable'],
-            'cabang_id' => ['required']
+            'branch_id' => ['required']
         ]);
 
         //Update process
@@ -172,7 +179,7 @@ class DataPelitaController extends Controller
         $datapelita->mandarin = $request->mandarin;
         $datapelita->jenis_kelamin = $request->jenis_kelamin;
         $datapelita->umur = $request->umur;
-        $datapelita->umur_sekarang = $request->umur_sekarang;
+         $datapelita->umur_sekarang = $this->hitungUmurSekarang($request->tgl_mohonTao, $request->umur);
         $datapelita->alamat = $request->alamat;
         $datapelita->kota = $request->kota;
         $datapelita->telp = $request->telp;
@@ -180,7 +187,7 @@ class DataPelitaController extends Controller
         $datapelita->email = $request->email;
         $datapelita->tgl_mohonTao = $request->tgl_mohonTao;
         $datapelita->status = $request->status;
-        $datapelita->cabang_id = $request->cabang_id;
+        $datapelita->branch_id = $request->branch_id;
 
         $datapelita->save();
 
@@ -198,5 +205,19 @@ class DataPelitaController extends Controller
         $datapelita = DataPelita::find($id);
         $datapelita->delete();
         return redirect()->route('datapelita.index');
+    }
+    public function hitungUmurSekarang($tgl, $umur) {
+        $now = Carbon::now();
+        $tahun = $now->year;
+        $year = date('Y', strtotime($tgl));
+        $selisih = $tahun - $year;
+        return $umur + $selisih;
+    }
+
+    public function checkStatus($status) {
+        if ($status == null) {
+            return 'Active';
+        }
+        return $status;
     }
 }

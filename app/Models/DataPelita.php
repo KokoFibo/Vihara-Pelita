@@ -21,7 +21,7 @@ class DataPelita extends Model
         'email',
         'tgl_mohonTao',
         'status',
-        'cabang_id'
+        'branch_id'
     ];
 
     public function branch()
