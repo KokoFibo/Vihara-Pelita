@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\KotaController;
 use App\Http\Controllers\LoadController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataPelitaController;
 use App\Http\Controllers\PelitaIndexController;
 
@@ -32,6 +33,7 @@ Route::get('/', function () {
             $d->umur_sekarang = $d->umur + $selisih;
             $d->save();
         }
+        
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -46,9 +48,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'] )->name('dashboard');
+
+       
 
     Route::get('/halaman', function () {
         return Inertia::render('Halaman');
