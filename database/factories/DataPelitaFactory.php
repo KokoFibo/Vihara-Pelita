@@ -28,7 +28,7 @@ class DataPelitaFactory extends Factory
             'hp' => fake()->e164PhoneNumber(),
             'email' => fake()->email,
             'tgl_mohonTao' => fake()->dateTimeThisDecade(),
-            'status' => fake()->words(2,true),
+            'status' => 'Active',
             'branch_id' => '1'
         ];
     }

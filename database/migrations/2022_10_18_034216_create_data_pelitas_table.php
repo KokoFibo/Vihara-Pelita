@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('telp')->nullable();;
             $table->string('hp')->nullable();;
             $table->string('email')->nullable();;
-            $table->date('tgl_mohonTao');
-            $table->string('status')->nullable();;
+            $table->date('tgl_mohonTao')->default(now());
+            $table->enum('status', ['Active', 'Inactive'])->default('active')->nullable();
             $table->timestamps();
         });
     }
