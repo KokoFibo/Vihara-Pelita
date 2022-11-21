@@ -17,9 +17,7 @@
                                 class="card w-3/5 bg-green-100 shadow-xl mx-auto"
                             >
                                 <div class="card-body">
-                                    <h2 class="card-title mx-auto">
-                                        Add Datasa
-                                    </h2>
+                                    <h2 class="card-title mx-auto">Add Data</h2>
                                     <!-- branch ID -->
 
                                     <form
