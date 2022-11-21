@@ -9,7 +9,7 @@
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <Link
                             :href="route('datapelita.index')"
@@ -23,8 +23,6 @@
                             class="max-w-7xl mx-auto sm:px-6 lg:px-8"
                             @submit.prevent="form.post('store')"
                         >
-                            <!-- <div class="flex flex-wrap -mx-3 mb-3"> -->
-                            <!-- <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0"> -->
                             <div class="flex items-center mb-3">
                                 <div class="w-40">
                                     <label class="mr-3">Branch</label>
@@ -365,7 +363,7 @@ const form = useForm({
     telp: "",
     hp: "",
     email: "",
-    tgl_mohonTao: "",
+    tgl_mohonTao: "11/21/2022",
     status: "Active",
     branch_id: null,
 });
