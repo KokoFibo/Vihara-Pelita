@@ -99,7 +99,7 @@ class DataPelitaController extends Controller
             'hp' => ['nullable', 'numeric'],
             'email' => ['nullable', 'email'],
             'tgl_mohonTao' => ['date'],
-            'status' => ['nullable'],
+            'status' => ['nullable', 'between:"Active","Inactive"'],
             'branch_id' => ['required']
         ]);
 
@@ -121,7 +121,6 @@ class DataPelitaController extends Controller
             'email' => $request->email,
             'tgl_mohonTao' => $request->tgl_mohonTao,
             'status' => $this->checkStatus($request->status),
-            // 'status' => $request->status,
             'branch_id' => $request->branch_id,
         ]);
         

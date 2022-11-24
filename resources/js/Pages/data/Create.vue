@@ -363,7 +363,7 @@ const form = useForm({
     telp: "",
     hp: "",
     email: "",
-    tgl_mohonTao: "11/21/2022",
+    tgl_mohonTao: "",
     status: "Active",
     branch_id: null,
 });
