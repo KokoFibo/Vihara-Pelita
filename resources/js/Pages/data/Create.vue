@@ -408,7 +408,7 @@
                             <div class="card-actions justify-end">
                                 <button
                                     type="submit"
-                                    @click="hideAdd"
+                                    @click="msg"
                                     class="btn btn-success"
                                 >
                                     Save
@@ -427,6 +427,16 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm, Link } from "@inertiajs/inertia-vue3";
+
+function msg() {
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Data saved",
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
 
 function tgl_hariIni() {
     const current = new Date();
