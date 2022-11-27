@@ -19,6 +19,9 @@ class DataPelita extends Model
         'telp',
         'hp',
         'email',
+        'pengajak',
+        'penjamin',
+        'pandita',
         'tgl_mohonTao',
         'status',
         'branch_id'

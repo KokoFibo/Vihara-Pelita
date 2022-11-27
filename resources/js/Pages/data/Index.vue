@@ -342,6 +342,15 @@ function check_JK(jk, umur) {
                                             Jenis Kelamin
                                         </th>
                                         <th class="bg-purple-500 text-white">
+                                            Pengajak
+                                        </th>
+                                        <th class="bg-purple-500 text-white">
+                                            Penjamin
+                                        </th>
+                                        <th class="bg-purple-500 text-white">
+                                            Pandita
+                                        </th>
+                                        <th class="bg-purple-500 text-white">
                                             <Link
                                                 :href="
                                                     route('datapelita.create')
@@ -369,6 +378,9 @@ function check_JK(jk, umur) {
                                                 )
                                             }}
                                         </td>
+                                        <td>{{ d.pengajak }}</td>
+                                        <td>{{ d.penjamin }}</td>
+                                        <td>{{ d.pandita }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <Link

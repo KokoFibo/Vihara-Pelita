@@ -23,6 +23,7 @@
                             class="max-w-7xl mx-auto sm:px-6 lg:px-8"
                             @submit.prevent="form.post('store')"
                         >
+                            <!-- Branch -->
                             <div class="flex items-center mb-3">
                                 <div class="w-40">
                                     <label class="mr-3">Branch</label>
@@ -300,13 +301,16 @@
                                     <div class="w-72">
                                         <label class="ml-16">Status</label>
                                     </div>
-                                    <input
-                                        v-model="form.status"
+                                    <select
                                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-green-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        id="grid-last-name"
-                                        type="text"
-                                        placeholder="Status"
-                                    />
+                                        v-model="form.status"
+                                    >
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">
+                                            Inactive
+                                        </option>
+                                    </select>
+
                                     <p
                                         class="text-red-500 text-xs italic"
                                         v-if="$page.props.errors.status"
@@ -315,8 +319,92 @@
                                     </p>
                                 </div>
                             </div>
+
+                            <!-- Pengajak -->
+                            <div class="flex items-center mb-3">
+                                <div class="w-40">
+                                    <label class="mr-3">Pengajak</label>
+                                </div>
+                                <div class="w-28">
+                                    <select
+                                        class="select select-bordered w-28"
+                                        v-model="form.pengajak"
+                                    >
+                                        <!-- <option disabled selected>Open this select menu</option> -->
+                                        <option
+                                            :value="dp.pengajak"
+                                            v-for="dp in datapengajak"
+                                            :key="dp.id"
+                                        >
+                                            {{ dp.pengajak }}
+                                        </option>
+                                    </select>
+                                    <p
+                                        class="text-red-500 text-xs italic"
+                                        v-if="$page.props.errors.branch_id"
+                                    >
+                                        {{ $page.props.errors.branch_id }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Penjamin -->
+                            <div class="flex items-center mb-3">
+                                <div class="w-40">
+                                    <label class="mr-3">Penjamin</label>
+                                </div>
+                                <div class="w-28">
+                                    <select
+                                        class="select select-bordered w-28"
+                                        v-model="form.penjamin"
+                                    >
+                                        <!-- <option disabled selected>Open this select menu</option> -->
+                                        <option
+                                            :value="dj.penjamin"
+                                            v-for="dj in datapenjamin"
+                                            :key="dj.id"
+                                        >
+                                            {{ dj.penjamin }}
+                                        </option>
+                                    </select>
+                                    <p
+                                        class="text-red-500 text-xs italic"
+                                        v-if="$page.props.errors.branch_id"
+                                    >
+                                        {{ $page.props.errors.branch_id }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Pandita -->
+                            <div class="flex items-center mb-3">
+                                <div class="w-40">
+                                    <label class="mr-3">Pandita</label>
+                                </div>
+                                <div class="w-28">
+                                    <select
+                                        class="select select-bordered w-28"
+                                        v-model="form.pandita"
+                                    >
+                                        <!-- <option disabled selected>Open this select menu</option> -->
+                                        <option
+                                            :value="dk.pandita"
+                                            v-for="dk in datapandita"
+                                            :key="dk.id"
+                                        >
+                                            {{ dk.pandita }}
+                                        </option>
+                                    </select>
+                                    <p
+                                        class="text-red-500 text-xs italic"
+                                        v-if="$page.props.errors.branch_id"
+                                    >
+                                        {{ $page.props.errors.branch_id }}
+                                    </p>
+                                </div>
+                            </div>
                             <!-- button save -->
-                            <hr class="my-3" />
+                            <!-- <hr class="my-3" /> -->
                             <div class="card-actions justify-end">
                                 <button
                                     type="submit"
@@ -351,6 +439,9 @@ function tgl_hariIni() {
 
 const props = defineProps({
     branch: Array,
+    datapengajak: Array,
+    datapenjamin: Array,
+    datapandita: Array,
 });
 
 const form = useForm({
@@ -364,6 +455,9 @@ const form = useForm({
     hp: "",
     email: "",
     tgl_mohonTao: "",
+    pengajak: "",
+    penjamin: "",
+    pandita: "",
     status: "Active",
     branch_id: null,
 });

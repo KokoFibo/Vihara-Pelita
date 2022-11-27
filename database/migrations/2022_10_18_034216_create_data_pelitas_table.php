@@ -24,11 +24,14 @@ return new class extends Migration
             $table->integer('umur_sekarang')->nullable();
             $table->string('alamat');
             $table->string('kota');
-            $table->string('telp')->nullable();;
-            $table->string('hp')->nullable();;
-            $table->string('email')->nullable();;
+            $table->string('telp')->nullable();
+            $table->string('hp')->nullable();
+            $table->string('email')->nullable();
+            $table->string('pengajak');
+            $table->string('penjamin');
+            $table->string('pandita');
             $table->date('tgl_mohonTao')->default(now());
-            $table->enum('status', ['Active', 'Inactive'])->default('active')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

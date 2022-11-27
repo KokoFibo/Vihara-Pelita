@@ -57,6 +57,7 @@ class DataPelitaController extends Controller
             ->when(request('column'), function($query){
                 $query->orderBy(request('column'), request('direction'));
             })
+            ->orderBy('id','desc')
             ->paginate($perPage)
             ->withQueryString()
             ->through(fn($datapelita) => [
@@ -65,6 +66,9 @@ class DataPelitaController extends Controller
                 'mandarin' =>$datapelita->mandarin,
                 'umur_sekarang' =>$datapelita->umur_sekarang,
                 'tgl_mohonTao' =>$datapelita->tgl_mohonTao,
+                'pengajak' =>$datapelita->pengajak,
+                'penjamin' =>$datapelita->penjamin,
+                'pandita' =>$datapelita->pandita,
                 'jenis_kelamin' =>$datapelita->jenis_kelamin,
             ]),
             // 'filters' => $request->only(['search', 'perPage', 'column', 'direction', 'jenisKelamin'])
@@ -79,7 +83,10 @@ class DataPelitaController extends Controller
     public function create()
     {
         $branch = Branch::all();
-        return Inertia::render('data/Create', compact('branch'));
+        $datapengajak = DataPelita::orderBy('pengajak', 'asc')->get();
+        $datapenjamin = DataPelita::orderBy('penjamin', 'asc')->get();
+        $datapandita = DataPelita::orderBy('pandita', 'asc')->get();
+        return Inertia::render('data/Create', compact(['branch', 'datapengajak', 'datapenjamin', 'datapandita' ]));
     }
 
     
@@ -98,16 +105,20 @@ class DataPelitaController extends Controller
             'telp' => ['nullable', 'numeric', 'min_digits:9', 'max_digits:13'],
             'hp' => ['nullable', 'numeric'],
             'email' => ['nullable', 'email'],
+            'pengajak' => ['required'],
+            'penjamin' => ['required'],
+            'pandita' => ['required'],
             'tgl_mohonTao' => ['date'],
-            'status' => ['nullable', 'between:"Active","Inactive"'],
+            // 'status' => ['nullable', 'between:"Active","Inactive"'],
+            'status' => ['required'],
             'branch_id' => ['required']
         ]);
 
-        $status = $request->status;
-        if ($status == null) {
-            $status == 'Active';
-        }
-        
+        // $status = $request->status;
+        // if ($status == null) {
+        //     $status == 'Active';
+        // }
+         
         DataPelita::create([
             'nama' => $request->nama,
             'mandarin' => $request->mandarin,
@@ -119,8 +130,12 @@ class DataPelitaController extends Controller
             'telp' => $request->telp,
             'hp' => $request->hp,
             'email' => $request->email,
+            'pengajak' => $request->pengajak,
+            'penjamin' => $request->penjamin,
+            'pandita' => $request->pandita,
             'tgl_mohonTao' => $request->tgl_mohonTao,
-            'status' => $this->checkStatus($request->status),
+            'status' => $request->status,
+            // 'status' => $this->checkStatus($request->status),
             'branch_id' => $request->branch_id,
         ]);
         
@@ -167,6 +182,9 @@ class DataPelitaController extends Controller
             'telp' => ['nullable', 'numeric', 'min_digits:9', 'max_digits:13'],
             'hp' => ['nullable', 'numeric'],
             'email' => ['nullable', 'email'],
+            'pengajak' => ['required'],
+            'penjamin' => ['required'],
+            'pandita' => ['required'],
             'tgl_mohonTao' => ['date'],
             'status' => ['nullable'],
             'branch_id' => ['required']
@@ -184,6 +202,9 @@ class DataPelitaController extends Controller
         $datapelita->telp = $request->telp;
         $datapelita->hp = $request->hp;
         $datapelita->email = $request->email;
+        $datapelita->pengajak = $request->pengajak;
+        $datapelita->penjamin = $request->penjamin;
+        $datapelita->pandita = $request->pandita;
         $datapelita->tgl_mohonTao = $request->tgl_mohonTao;
         $datapelita->status = $request->status;
         $datapelita->branch_id = $request->branch_id;

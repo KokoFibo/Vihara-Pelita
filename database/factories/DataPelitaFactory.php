@@ -28,6 +28,9 @@ class DataPelitaFactory extends Factory
             'hp' => fake()->e164PhoneNumber(),
             'email' => fake()->email,
             'tgl_mohonTao' => fake()->dateTimeThisDecade(),
+            'pengajak' => fake()->name,
+            'penjamin' => fake()->name,
+            'pandita' => fake()->name,
             'status' => 'Active',
             'branch_id' => '1'
         ];
