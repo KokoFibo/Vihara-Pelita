@@ -476,8 +476,8 @@ function check_JK(jk, umur) {
                             <div class="mt-2 ml-5">
                                 <div>Jenis Kelamin:</div>
                                 <select
-                                    v-model="pelitaFilters.jenisKelamin"
                                     @change="pelitaFilters.getJenisKelamin"
+                                    v-model="pelitaFilters.jenisKelamin"
                                     class="select select-info max-w-xs"
                                 >
                                     <option disabled selected>Semua</option>

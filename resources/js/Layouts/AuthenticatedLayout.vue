@@ -21,7 +21,9 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo class="block h-9 w-auto" />
+                                    <ApplicationLogo
+                                        class="block h-9 w-auto fill-current text-gray-800"
+                                    />
                                 </Link>
                             </div>
 
@@ -41,20 +43,8 @@ const showingNavigationDropdown = ref(false);
                                         route().current('datapelita.index')
                                     "
                                 >
-                                    Data Pelita Hati
+                                    Pelita
                                 </NavLink>
-                                <NavLink
-                                    :href="route('halaman')"
-                                    :active="route().current('halaman')"
-                                >
-                                    Halaman
-                                </NavLink>
-                                <NavLink
-                                    :href="route('daerah.index')"
-                                ></NavLink>
-                                <NavLink
-                                    :href="route('datapelita.create')"
-                                ></NavLink>
                             </div>
                         </div>
 
@@ -87,6 +77,11 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
+                                        <DropdownLink
+                                            :href="route('profile.edit')"
+                                        >
+                                            Profile
+                                        </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
@@ -157,13 +152,6 @@ const showingNavigationDropdown = ref(false);
                         >
                             Dashboard
                         </ResponsiveNavLink>
-
-                        <ResponsiveNavLink
-                            :href="route('datapelita.index')"
-                            :active="route().current('datapelita.index')"
-                        >
-                            Data Pelita Hati
-                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -178,6 +166,9 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="mt-3 space-y-1">
+                            <ResponsiveNavLink :href="route('profile.edit')">
+                                Profile
+                            </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 :href="route('logout')"
                                 method="post"
